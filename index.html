@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lim Yong Leong - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES (THEMING) --- */
+        :root {
+            /* Light Mode Default */
+            --primary-color: #0f172a;       /* Dark Blue/Slate for Headings */
+            --accent-color: #2563eb;        /* Royal Blue for buttons/highlights */
+            --text-color: #334155;          /* Grey for body text */
+            --bg-color: #f8fafc;            /* Light Grey/White background */
+            --card-bg: #ffffff;             /* White cards */
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --border-color: #e2e8f0;
+        }
+
+        /* Dark Mode Overrides */
+        body.dark-mode {
+            --primary-color: #f1f5f9;       /* White for Headings */
+            --accent-color: #60a5fa;        /* Lighter Blue */
+            --text-color: #94a3b8;          /* Light Grey for body text */
+            --bg-color: #0f172a;            /* Dark Blue/Black background */
+            --card-bg: #1e293b;             /* Dark Grey cards */
+            --nav-bg: rgba(15, 23, 42, 0.95);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            --border-color: #334155;
+        }
+
+        /* --- GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: var(--nav-bg);
+            padding: 1rem 5%;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            background: none;
+            border: none;
+            padding: 5px;
+            transition: transform 0.3s;
+        }
+        
+        #theme-toggle:hover {
+            transform: rotate(30deg);
+            color: var(--accent-color);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            gap: 4rem;
+            /* Subtle Pattern Background */
+            background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        .hero-image {
+            flex: 0 0 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 280px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 4px solid var(--card-bg);
+            transition: transform 0.3s;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.02) rotate(2deg);
+        }
+
+        /* --- BUTTONS --- */
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem; /* Space between icon and text */
+            background-color: var(--accent-color);
+            color: white !important;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* Outline Button Style (for LinkedIn) */
+        .btn-outline {
+            background-color: transparent;
+            color: var(--accent-color) !important;
+            border: 2px solid var(--accent-color);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent-color);
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 5rem 10%;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            margin-top: 0.5rem;
+            border-radius: 2px;
+        }
+
+        /* --- CARDS (Experience & Education) --- */
+        .experience-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--accent-color);
+            transition: transform 0.3s;
+        }
+
+        .experience-card:hover {
+            transform: translateX(10px);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .company {
+            color: var(--text-color);
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        .date {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            background: var(--bg-color);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        ul.achievements {
+            list-style-position: inside;
+            margin-top: 1rem;
+        }
+
+        ul.achievements li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- SKILLS --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: var(--card-bg);
+            color: var(--accent-color);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* --- PROJECTS --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--card-bg);
+            color: var(--text-color);
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* --- ANIMATIONS --- */
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                margin-top: 60px;
+                gap: 2rem;
+                padding-top: 3rem;
+            }
+            .hero h1 { font-size: 2.5rem; }
+            .cta-group { justify-content: center; }
+            section { padding: 3rem 5%; }
+            
+            /* Mobile Navigation */
+            .mobile-menu-btn { display: block; }
+            
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--card-bg);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: var(--shadow);
+                transform: translateY(-150%); /* Hide upwards */
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .nav-links a {
+                display: block;
+                text-align: center;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+
+    <nav>
+        <div class="logo">Lim Yong Leong</div>
+        
+        <div class="nav-controls">
+            <div class="nav-links" id="navLinks">
+                <a href="#about" onclick="toggleMobileMenu()">About</a>
+                <a href="#experience" onclick="toggleMobileMenu()">Experience</a>
+                <a href="#skills" onclick="toggleMobileMenu()">Skills</a>
+                <a href="#projects" onclick="toggleMobileMenu()">Projects</a>
+                <a href="#education" onclick="toggleMobileMenu()">Education</a>
+            </div>
+
+            <button id="theme-toggle" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+
+            <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero hidden">
+        <div class="hero-content">
+            <h1>Data Engineering & <br>Quantitative Analysis</h1>
+            <p>Computer Science Student | Python & Database Specialist</p>
+            <p><em>"Transforming raw data into trading intelligence."</em></p>
+            
+            <div class="cta-group">
+                <a href="#contact" class="btn">Get in Touch</a>
+                
+                <a href="https://www.linkedin.com/in/leonlim3099" target="_blank" class="btn btn-outline">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <img src="profile.jpg" alt="Lim Yong Leong" class="profile-img">
+        </div>
+    </div>
+
+    <section id="about" class="hidden">
+        <h2>About Me</h2>
+        <p>
+            I am a final-year Bachelor of Computer Science (Honours) student at Taylor's University with a CGPA of 3.37. 
+            Passionate about bridging the gap between software engineering and financial markets, I specialize in building 
+            robust data pipelines, automating complex workflows, and optimizing database architectures.
+        </p>
+        <br>
+        <p>
+            Currently, I am focused on quantitative backtesting and full-stack development using Python and Django.
+            I pride myself on being a dependable team player who values collaboration and continuous learning.
+        </p>
+    </section>
+
+    <section id="experience">
+        <h2 class="hidden">Work Experience</h2>
+
+        <div class="experience-card hidden">
+            <div class="job-header">
+                <div>
+                    <div class="job-title">Database & Backtest Intern</div>
+                    <div class="company">Quantalpha LLP</div>
+                </div>
+                <div class="date">Sep 2025 - Mar 2026</div>
+            </div>
+            <ul class="achievements">
+                <li><strong>Database Redesign:</strong> Redesigned the entire database architecture from a single schema to a multi-schema PostgreSQL system, improving scalability for providers like DefiLlama and Binance.</li>
+                <li><strong>Automation Tools:</strong> Developed a Django web application to automate schema creation, including setting up triggers, indexes, and functions.</li>
+                <li><strong>Secure Infrastructure:</strong> Engineered a secure job scheduling system using Docker and Redis to auto-update data in isolated "code sandboxes" to prevent server crashes.</li>
+                <li><strong>Quantitative Backtesting:</strong> Utilized VectorBT Pro to simulate trading strategies, validating performance via Sharpe Ratio and Drawdown analysis.</li>
+                <li><strong>Data Pipelines:</strong> Wrote Python scripts to fetch, clean, and normalize financial OHLCV data from external APIs.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="skills" class="hidden">
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Languages & Core</h3>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">SQL (PostgreSQL)</span>
+                    <span class="tag">Java</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Web & Infrastructure</h3>
+                <div class="tags">
+                    <span class="tag">Django</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">Redis</span>
+                    <span class="tag">Linux</span>
+                    <span class="tag">HTML/CSS</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Data & Tools</h3>
+                <div class="tags">
+                    <span class="tag">Pandas</span>
+                    <span class="tag">VectorBT Pro</span>
+                    <span class="tag">Machine Learning</span>
+                    <span class="tag">Data Mining</span>
+                    <span class="tag">Jupyter Notebooks</span>
+                    <span class="tag">Notion</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Creative & Productivity</h3>
+                <div class="tags">
+                    <span class="tag">Microsoft Excel</span>
+                    <span class="tag">Microsoft Office</span>
+                    <span class="tag">Video Editing</span>
+                    <span class="tag">Canva</span>
+                    <span class="tag">Figma</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="hidden">Key Projects</h2>
+        <div class="project-grid">
+            <div class="project-card hidden">
+                <div class="project-content">
+                    <h3>Quantalpha Internal Dashboard</h3>
+                    <p style="color: var(--text-color); opacity: 0.7; margin: 0.5rem 0;"><em>Internship Project</em></p>
+                    <p>
+                        A comprehensive Django application to manage the company database. Features include:
+                        <br>• <strong>Auto-Schema Creation:</strong> Automates the creation of schemas with pre-built triggers and functions.
+                        <br>• <strong>Auto-Update Jobs:</strong> Uses Docker containers to safely run user scripts for updating data automatically.
+                    </p>
+                </div>
+            </div>
+
+            <div class="project-card hidden">
+                <div class="project-content">
+                    <h3>Database Architecture Redesign</h3>
+                    <p style="color: var(--text-color); opacity: 0.7; margin: 0.5rem 0;"><em>Internship Project</em></p>
+                    <p>Redesigned the entire company database to fix significant flaws in the previous single-schema system. The new design standardizes data storage across multiple providers (Binance, Glassnode, etc.), improving query speed and data integrity.</p>
+                </div>
+            </div>
+
+            <div class="project-card hidden">
+                <div class="project-content">
+                    <h3>Real-Time Sales Prediction Platform</h3>
+                    <p style="color: var(--text-color); opacity: 0.7; margin: 0.5rem 0;"><em>Final Year Project - Group Leader</em></p>
+                    <p>Developed a platform utilizing machine learning models to predict sales in real-time. Integrated data visualization dashboards and dataset upload features.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2 class="hidden">Education & Awards</h2>
+        
+        <div class="experience-card hidden" style="border-left-color: var(--primary-color);">
+            <div class="job-header">
+                <div class="job-title">Bachelor of Computer Science (Honours)</div>
+                <div class="company">Taylor's University</div>
+                <div class="date">Aug 2022 - Aug 2025</div>
+            </div>
+            <p><strong>CGPA:</strong> 3.37</p>
+            <p style="margin-top: 0.5rem;"><strong>Awards:</strong> Dean's List (Jan 2023, Feb 2024, April 2024)</p>
+        </div>
+
+        <div class="experience-card hidden" style="border-left-color: #64748b;">
+            <div class="job-header">
+                <div class="job-title">Foundation in Computing</div>
+                <div class="company">Taylor's University</div>
+                <div class="date">Apr 2021 - Aug 2022</div>
+            </div>
+            <p><strong>CGPA:</strong> 3.47</p>
+        </div>
+
+        <div class="experience-card hidden" style="border-left-color: #94a3b8;">
+            <div class="job-header">
+                <div class="job-title">IGCSE</div>
+                <div class="company">Taylor's International School Puchong</div>
+                <div class="date">Jan 2017 - Dec 2020</div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2>Contact Me</h2>
+        <p>I am currently open to opportunities in Data Engineering and Quantitative Analysis.</p>
+        
+        <div class="footer-buttons">
+            <a href="mailto:leonlim3099@gmail.com" class="btn">
+                <i class="fas fa-envelope"></i> Email Me
+            </a>
+            <a href="https://www.linkedin.com/in/leonlim3099" target="_blank" class="btn btn-outline">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+        </div>
+
+        <br><br>
+        <p style="font-size: 0.8rem; opacity: 0.7;">&copy; 2026 Lim Yong Leong. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // 1. Dark Mode Logic
+        const toggleBtn = document.getElementById('theme-toggle');
+        const icon = toggleBtn.querySelector('i');
+        const body = document.body;
+
+        // Check for saved user preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Switch Icon
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // 2. Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // 3. Scroll Animations (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Select all elements to animate
+        document.querySelectorAll('.hidden').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
