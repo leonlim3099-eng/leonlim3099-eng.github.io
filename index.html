@@ -19,71 +19,60 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
-        /* --- PARTICLE BACKGROUND --- */
         #particles-js {
             position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            z-index: -1; /* Puts it BEHIND everything */
-            pointer-events: none; /* Allows you to click buttons through it */
+            z-index: -1; 
+            pointer-events: none; 
         }
-        /* --- CUSTOM SCROLLBAR --- */
-        /* Width */
         ::-webkit-scrollbar {
             width: 10px;
         }
 
-        /* Track (Background) */
         ::-webkit-scrollbar-track {
-            background: var(--bg-color); /* Matches your theme background */
+            background: var(--bg-color); 
         }
 
-        /* Handle (The moving part) */
         ::-webkit-scrollbar-thumb {
-            background: #94a3b8; /* Neutral Grey */
+            background: #94a3b8; 
             border-radius: 5px;
-            border: 2px solid var(--bg-color); /* Creates a "floating" effect */
+            border: 2px solid var(--bg-color); 
         }
 
-        /* Handle on Hover */
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-color); /* Turns Blue when you grab it */
+            background: var(--accent-color); 
         }
 
-        /* Firefox Support */
         html {
             scrollbar-width: thin;
             scrollbar-color: var(--accent-color) var(--bg-color);
         }
 
-        /* --- CSS VARIABLES (THEMING) --- */
         :root {
-            /* Light Mode Default */
-            --primary-color: #0f172a;       /* Dark Blue/Slate for Headings */
-            --accent-color: #2563eb;        /* Royal Blue for buttons/highlights */
-            --text-color: #334155;          /* Grey for body text */
-            --bg-color: #f8fafc;            /* Light Grey/White background */
-            --card-bg: #ffffff;             /* White cards */
+            --primary-color: #0f172a;       
+            --accent-color: #2563eb;        
+            --text-color: #334155;          
+            --bg-color: #f8fafc;            
+            --card-bg: #ffffff;             
             --nav-bg: rgba(255, 255, 255, 0.95);
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --border-color: #e2e8f0;
         }
 
-        /* Dark Mode Overrides */
         body.dark-mode {
-            --primary-color: #f1f5f9;       /* White for Headings */
-            --accent-color: #60a5fa;        /* Lighter Blue */
-            --text-color: #94a3b8;          /* Light Grey for body text */
-            --bg-color: #0f172a;            /* Dark Blue/Black background */
-            --card-bg: #1e293b;             /* Dark Grey cards */
+            --primary-color: #f1f5f9;       
+            --accent-color: #60a5fa;        
+            --text-color: #94a3b8;          
+            --bg-color: #0f172a;            
+            --card-bg: #1e293b;             
             --nav-bg: rgba(15, 23, 42, 0.95);
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
             --border-color: #334155;
         }
 
-        /* --- GLOBAL STYLES --- */
         * {
             margin: 0;
             padding: 0;
@@ -96,14 +85,13 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden; 
         }
 
         html {
             scroll-behavior: smooth;
         }
 
-        /* --- NAVIGATION --- */
         nav {
             background: var(--nav-bg);
             padding: 1rem 5%;
@@ -146,7 +134,6 @@
             color: var(--accent-color);
         }
 
-        /* Theme Toggle Button */
         #theme-toggle {
             cursor: pointer;
             font-size: 1.2rem;
@@ -162,7 +149,6 @@
             color: var(--accent-color);
         }
 
-        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
             font-size: 1.5rem;
@@ -170,7 +156,6 @@
             cursor: pointer;
         }
 
-        /* --- HERO SECTION --- */
         .hero {
             margin-top: 80px;
             padding: 6rem 5%;
@@ -179,7 +164,6 @@
             justify-content: center;
             min-height: 80vh;
             gap: 4rem;
-            /* Subtle Pattern Background */
             background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
             background-size: 30px 30px;
         }
@@ -214,21 +198,17 @@
             width: 280px;
             height: auto;
             border-radius: 20px;
-            /* Clean base state */
             box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
             border: 4px solid var(--card-bg);
-            transition: all 0.4s ease; /* Smooth transition for shadow and scale */
+            transition: all 0.4s ease;
         }
 
         .profile-img:hover {
-            /* No rotation, just a vertical lift */
             transform: translateY(-5px); 
-            /* The Electric Blue Glow */
             box-shadow: 0 20px 40px rgba(37, 99, 235, 0.4); 
-            border-color: var(--accent-color); /* Border turns blue */
+            border-color: var(--accent-color); 
         }
 
-        /* --- BUTTONS --- */
         .cta-group {
             display: flex;
             gap: 1rem;
@@ -238,7 +218,7 @@
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem; /* Space between icon and text */
+            gap: 0.5rem; 
             background-color: var(--accent-color);
             color: white !important;
             padding: 0.8rem 2rem;
@@ -255,7 +235,6 @@
             transform: translateY(-2px);
         }
 
-        /* Outline Button Style (for LinkedIn) */
         .btn-outline {
             background-color: transparent;
             color: var(--accent-color) !important;
@@ -269,7 +248,6 @@
             transform: translateY(-2px);
         }
 
-        /* --- SECTIONS --- */
         section {
             padding: 5rem 10%;
         }
@@ -291,7 +269,6 @@
             border-radius: 2px;
         }
 
-        /* --- CARDS (Experience & Education) --- */
         .experience-card {
             background: var(--card-bg);
             padding: 2rem;
@@ -344,7 +321,6 @@
             margin-bottom: 0.5rem;
         }
 
-        /* --- SKILLS --- */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -380,7 +356,6 @@
             transform: translateY(-2px);
         }
 
-        /* --- PROJECTS --- */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -413,7 +388,6 @@
             margin-bottom: 0.5rem;
         }
 
-        /* --- FOOTER --- */
         footer {
             background: var(--card-bg);
             color: var(--text-color);
@@ -431,7 +405,6 @@
             flex-wrap: wrap;
         }
 
-        /* --- ANIMATIONS --- */
         .hidden {
             opacity: 0;
             transform: translateY(30px);
@@ -443,7 +416,6 @@
             transform: translateY(0);
         }
 
-        /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 768px) {
             .hero {
                 flex-direction: column-reverse;
@@ -456,7 +428,6 @@
             .cta-group { justify-content: center; }
             section { padding: 3rem 5%; }
             
-            /* Mobile Navigation */
             .mobile-menu-btn { display: block; }
             
             .nav-links {
@@ -469,7 +440,7 @@
                 padding: 2rem;
                 gap: 1.5rem;
                 box-shadow: var(--shadow);
-                transform: translateY(-150%); /* Hide upwards */
+                transform: translateY(-150%); 
                 transition: transform 0.3s ease-in-out;
             }
 
@@ -484,24 +455,21 @@
             }
         }
 
-        /* --- BACK TO TOP BUTTON --- */
         #backToTop {
-            display: none; /* Hidden by default */
+            display: none; 
             position: fixed;
             bottom: 30px;
             right: 30px;
-            z-index: 999; /* High priority to sit on top of everything */
+            z-index: 999; 
             
-            /* Shape & Color */
             width: 50px;
             height: 50px;
             border: none;
             outline: none;
-            background-color: var(--accent-color); /* Matches your Blue theme */
+            background-color: var(--accent-color);
             color: white;
-            border-radius: 50%; /* Makes it a perfect circle */
+            border-radius: 50%;
             
-            /* Interaction */
             cursor: pointer;
             font-size: 18px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
@@ -509,8 +477,8 @@
         }
 
         #backToTop:hover {
-            background-color: var(--primary-color); /* Darker blue on hover */
-            transform: translateY(-5px); /* Lifts up slightly */
+            background-color: var(--primary-color); 
+            transform: translateY(-5px); 
             box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
         }
 
@@ -746,12 +714,10 @@
     </footer>
 
     <script>
-        // 1. Dark Mode Logic
         const toggleBtn = document.getElementById('theme-toggle');
         const icon = toggleBtn.querySelector('i');
         const body = document.body;
 
-        // Check for saved user preference
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             body.classList.add('dark-mode');
@@ -762,7 +728,6 @@
         toggleBtn.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
             
-            // Switch Icon
             if (body.classList.contains('dark-mode')) {
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
@@ -774,15 +739,13 @@
             }
         });
 
-        // 2. Mobile Menu Toggle
         function toggleMobileMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
 
-        // 3. Scroll Animations (Intersection Observer)
         const observerOptions = {
-            threshold: 0.1 // Trigger when 10% of the element is visible
+            threshold: 0.1 
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -793,7 +756,6 @@
             });
         }, observerOptions);
 
-        // Select all elements to animate
         document.querySelectorAll('.hidden').forEach((el) => {
             observer.observe(el);
         });
@@ -805,7 +767,7 @@
         particlesJS("particles-js", {
             "particles": {
                 "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#2563eb" }, /* Your Accent Blue */
+                "color": { "value": "#2563eb" }, 
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.5, "random": false },
                 "size": { "value": 3, "random": true },
@@ -813,7 +775,7 @@
                     "enable": true,
                     "distance": 150,
                     "color": "#2563eb",
-                    "opacity": 0.2, /* Subtle lines */
+                    "opacity": 0.2, 
                     "width": 1
                 },
                 "move": {
@@ -829,7 +791,7 @@
             "interactivity": {
                 "detect_on": "canvas",
                 "events": {
-                    "onhover": { "enable": true, "mode": "grab" }, /* Connects to mouse */
+                    "onhover": { "enable": true, "mode": "grab" }, 
                     "onclick": { "enable": true, "mode": "push" },
                     "resize": true
                 },
@@ -849,7 +811,6 @@
 
 
     <script>
-        // Back to Top Button Logic
         const backToTopBtn = document.getElementById('backToTop');
 
         window.onscroll = function() {
